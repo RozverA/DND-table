@@ -20,8 +20,14 @@ public:
 	QPushButton*	HPb[3];
 	QTextEdit*		HPl[3];
 	QLabel*			HPlb;
-
-
+	//foto
+	QLabel* foto;
+	QPushButton* fotoClick;
+	//number
+	QString fraS;
+	uint8_t fraN;
+private slots:
+	void fotoClickIvt();
 };
 
 #endif // FRAME_H

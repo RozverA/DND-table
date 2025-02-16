@@ -11,7 +11,8 @@ MainWindow::MainWindow(QWidget *parent)	: QMainWindow(parent)
 	{
 		frm[i] = new frame(this);
 		frm[i]->setGeometry(0,0,900,500);
-		//frm[i]->show();
+		frm[i]->fraN = i+1;
+		frm[i]->fraS = QString::number(i+1);
 	}
 	frm[0]->setGeometry(0,0,800,500);
 	frm[1]->setGeometry(850,0,800,500);

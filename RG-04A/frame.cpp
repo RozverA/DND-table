@@ -53,13 +53,38 @@ frame::frame(QWidget *parent) : QFrame(parent)
 	HPlb->setFont(font);
 
 	varTemp = 240;
-	HPb[0]->setGeometry(varTemp, 430, 80, 60);	HPb[0]->setText("Жизнь:");	varTemp+=80;
+	HPb[0]->setGeometry(varTemp, 430, 80, 60);	HPb[0]->setText("HP:");	varTemp+=80;
 	HPl[0]->setGeometry(varTemp, 430, 60, 60);								varTemp+=60;
 	HPb[1]->setGeometry(varTemp, 430, 80, 60);	HPb[1]->setText("Урон:");	varTemp+=80;
 	HPl[1]->setGeometry(varTemp, 430, 60, 60);								varTemp+=60;
-	HPb[2]->setGeometry(varTemp, 430, 80, 60);	HPb[2]->setText("Хил:");varTemp+=80;
-	HPlb->setGeometry(  varTemp, 430, 60, 60);	HPlb->setText("Ост.:");	varTemp+=60;
+	HPb[2]->setGeometry(varTemp, 430, 80, 60);	HPb[2]->setText("Хил:");	varTemp+=80;
+	HPlb->setGeometry(  varTemp, 430, 60, 60);	HPlb->setText("Ост.:");		varTemp+=60;
 	HPl[2]->setGeometry(varTemp, 430, 60, 60);
+
+	//////////////////////////////////////////////////////////////////////////////////////
+	foto = new QLabel(this);
+	fotoClick = new QPushButton(this);
+	fotoClick->setGeometry(120,10, 50, 30);
+	fotoClick->setText("Фото");
+
+	foto->setGeometry(480,10,300,300);
+
+	connect(fotoClick,SIGNAL(clicked()),this,SLOT(fotoClickIvt() ) );
+
+
+
+
+
+
+
+
+}
+
+void frame::fotoClickIvt()
+{
+	QPixmap myPixmap( "player" + fraS+".png" );
+	myPixmap =  myPixmap.scaledToWidth(300);
+	foto->setPixmap(myPixmap);
 }
 
 
