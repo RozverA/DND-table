@@ -21,7 +21,7 @@ frame::frame(QWidget *parent) : QFrame(parent)
 
 		STATb[i]->setFont(font);
 
-		STATl[i] = new QTextEdit(this);
+		STATl[i] = new QLineEdit(this);
 		STATl[i]->setGeometry(10+150+10,varTemp,40,30);
 		STATl[i]->setStyleSheet("background: white;");
 
@@ -44,7 +44,7 @@ frame::frame(QWidget *parent) : QFrame(parent)
 
 		HPb[i]->setFont(font);
 
-		HPl[i] = new QTextEdit(this);
+		HPl[i] = new QLineEdit(this);
 		HPl[i]->setStyleSheet("background: white;");
 		HPl[i]->setFont(font);
 	}
@@ -54,10 +54,13 @@ frame::frame(QWidget *parent) : QFrame(parent)
 
 	varTemp = 240;
 	HPb[0]->setGeometry(varTemp, 430, 80, 60);	HPb[0]->setText("HP:");	varTemp+=80;
+	connect(HPb[0],SIGNAL(clicked()),this,SLOT(hpMaxF() ) );
 	HPl[0]->setGeometry(varTemp, 430, 60, 60);								varTemp+=60;
 	HPb[1]->setGeometry(varTemp, 430, 80, 60);	HPb[1]->setText("Урон:");	varTemp+=80;
+	connect(HPb[1],SIGNAL(clicked()),this,SLOT(Dmg() ) );
 	HPl[1]->setGeometry(varTemp, 430, 60, 60);								varTemp+=60;
 	HPb[2]->setGeometry(varTemp, 430, 80, 60);	HPb[2]->setText("Хил:");	varTemp+=80;
+	connect(HPb[2],SIGNAL(clicked()),this,SLOT(Heal() ) );
 	HPlb->setGeometry(  varTemp, 430, 60, 60);	HPlb->setText("Ост.:");		varTemp+=60;
 	HPl[2]->setGeometry(varTemp, 430, 60, 60);
 
@@ -85,6 +88,36 @@ void frame::fotoClickIvt()
 	QPixmap myPixmap( "player" + fraS+".png" );
 	myPixmap =  myPixmap.scaledToWidth(300);
 	foto->setPixmap(myPixmap);
+}
+
+void frame::hpMaxF()
+{
+	int a = STATl[6]->text().toInt();
+	if(a < 1){return;}
+	HPl[0]->setText( QString::number( a*10 ) );
+}
+
+void frame::Dmg()
+{
+	int a = HPl[2]->text().toInt() ;
+	if(a < 1){return;}
+	int b = HPl[1]->text().toInt();
+
+	if((a-b)<0) {	HPl[2]->setText(QString::number(0));       }
+	else		{	HPl[2]->setText(QString::number( a - b ));   }
+
+	HPl[1]->setText("");
+}
+
+void frame::Heal()
+{
+	int a = HPl[2]->text().toInt();
+	int b = HPl[1]->text().toInt();
+	int c = HPl[0]->text().toInt();
+	if(c < (a+b)) { HPl[2]->setText(HPl[0]->text());       }
+	else {          HPl[2]->setText(QString::number( a + b ));   }
+
+	HPl[1]->setText("");
 }
 
 

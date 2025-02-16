@@ -6,6 +6,7 @@
 #include <QLabel>
 #include <QTextEdit>
 #include <QPushButton>
+#include <QLineEdit>
 
 class frame : public QFrame
 {
@@ -15,10 +16,10 @@ public:
 	QTextEdit* Name;
 	//params
 	QPushButton*	STATb[7];
-	QTextEdit*		STATl[7];
+	QLineEdit*		STATl[7];
 	//HPbar
 	QPushButton*	HPb[3];
-	QTextEdit*		HPl[3];
+	QLineEdit*		HPl[3];
 	QLabel*			HPlb;
 	//foto
 	QLabel* foto;
@@ -28,6 +29,9 @@ public:
 	uint8_t fraN;
 private slots:
 	void fotoClickIvt();
+	void hpMaxF();
+	void Dmg();
+	void Heal();
 };
 
 #endif // FRAME_H
