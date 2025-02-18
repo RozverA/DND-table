@@ -13,7 +13,7 @@ class frame : public QFrame
 	Q_OBJECT
 public:
 	explicit frame(QWidget *parent = nullptr);
-	QTextEdit* Name;
+	QLineEdit* Name;
 	//params
 	QPushButton*	STATb[7];
 	QLineEdit*		STATl[7];
@@ -27,6 +27,13 @@ public:
 	//number
 	QString fraS;
 	uint8_t fraN;
+	//money
+	QLabel*			Mlb;
+	QLineEdit*		Ml;
+
+	//wearpon
+	QLabel*			wlb[4];
+	QLineEdit*		wl[4];
 private slots:
 	void fotoClickIvt();
 	void hpMaxF();

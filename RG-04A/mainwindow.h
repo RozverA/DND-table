@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "frame.h"
+#include <QSettings>
 
 class MainWindow : public QMainWindow
 {
@@ -13,6 +14,11 @@ public:
 	//frame* fr;
 	frame* frm[4];
 	//QFrame* fra;
+	QPushButton* saveBut;
+	QPushButton* loadBut;
 	~MainWindow();
+private slots:
+	void saveProc();
+	void loadProc();
 };
 #endif // MAINWINDOW_H
