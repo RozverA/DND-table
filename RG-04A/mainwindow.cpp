@@ -2,6 +2,7 @@
 #include <QSettings>
 
 QSettings sett("save.txt",QSettings::IniFormat);
+frame* ptrFrame[4];
 
 MainWindow::MainWindow(QWidget *parent)	: QMainWindow(parent)
 {
@@ -26,6 +27,8 @@ MainWindow::MainWindow(QWidget *parent)	: QMainWindow(parent)
 		frm[i]->setGeometry(0,0,900,500);
 		frm[i]->fraN = i+1;
 		frm[i]->fraS = QString::number(i+1);
+		frm[i]->frameCnt = i;
+		ptrFrame[i] = frm[i];
 	}
 	frm[0]->setGeometry(0,0,800,500);
 	frm[1]->setGeometry(850,0,800,500);
@@ -50,6 +53,8 @@ void MainWindow::saveProc()
 			sett.setValue("name",			frm[i]->Name->text() );
 			sett.setValue("money",			frm[i]->Ml->text() );
 
+			sett.setValue("KB",			frm[i]->kbl->text() );
+
 			sett.setValue("B1",			frm[i]->wl[0]->text() );
 			sett.setValue("B2",			frm[i]->wl[1]->text() );
 			sett.setValue("D1",			frm[i]->wl[2]->text() );
@@ -62,6 +67,13 @@ void MainWindow::saveProc()
 			sett.setValue("lovkost",		frm[i]->STATl[4]->text() );
 			sett.setValue("sila",			frm[i]->STATl[5]->text() );
 			sett.setValue("teloslojenie",	frm[i]->STATl[6]->text() );
+
+			for(uint8_t j = 0; j<10; j++)
+			{
+				sett.setValue("sp1_"+QString::number(j),	frm[i]->spell1[j]->text() );
+				sett.setValue("sp2_"+QString::number(j),	frm[i]->spell2[j]->text() );
+			}
+
 		sett.endGroup();
 	}
 }
@@ -86,6 +98,14 @@ void MainWindow::loadProc()
 			frm[i]->STATl[4]->setText(sett.value("lovkost").toString()		);
 			frm[i]->STATl[5]->setText(sett.value("sila").toString()			);
 			frm[i]->STATl[6]->setText(sett.value("teloslojenie").toString() );
+
+			for(uint8_t j = 0; j<10; j++)
+			{
+				frm[i]->spell1[j]->setText(sett.value("sp1_"+QString::number(j)).toString());
+				frm[i]->spell2[j]->setText(sett.value("sp2_"+QString::number(j)).toString());
+			}
+
+			frm[i]->kbl->setText(sett.value("KB").toString()				);
 		sett.endGroup();
 	}
 }

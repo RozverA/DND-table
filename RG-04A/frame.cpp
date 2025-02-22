@@ -1,5 +1,6 @@
 #include "frame.h"
 #include "A-def.h"
+#include <QValidator>
 
 frame::frame(QWidget *parent) : QFrame(parent)
 {
@@ -10,6 +11,8 @@ frame::frame(QWidget *parent) : QFrame(parent)
 
 	QFont font = Name->font();
 	font.setPixelSize(butSizeFont);
+	QFont fontLow = Name->font();
+	fontLow.setPixelSize(14);
 
 	//////////////////////////////////////////////////////////////////////////////////////
 	uint16_t varTemp = 500 - 40;
@@ -111,7 +114,49 @@ frame::frame(QWidget *parent) : QFrame(parent)
 
 	wlb[3]->setGeometry(150, 60, 30, 40); wlb[3]->setText("D:");
 	wl[3]->setGeometry(180, 60, 40, 40);	wl[3]->setText("6");
+	//////////////////////////////////////////////////////////////////////////////////////
 
+	kblb = new QLabel(this);
+	kblb->setStyleSheet("color: white;");
+
+	kblb->setFont(font);
+
+	kbl = new QLineEdit(this);
+	kbl->setStyleSheet("background: white;");
+	kbl->setFont(font);
+
+	kblb->setGeometry(10, 110, 100, 40); kblb->setText("КБ:");
+	kbl->setGeometry(110, 110, 40, 40);	kbl->setText("0");
+	//////////////////////////////////////////////////////////////////////////////////////
+	varTemp = 10;
+	for (uint8_t i = 0; i<10 ;i++)
+	{
+		spell1[i] = new QLineEdit(this);
+		spell1[i]->setStyleSheet("background: white;");
+		spell1[i]->setFont(font);
+		spell1[i]->setValidator(new QIntValidator(0,10,this));
+
+		spell2[i] = new QLineEdit(this);
+		spell2[i]->setStyleSheet("background: white;");
+		spell2[i]->setFont(fontLow);
+		//spell2[i]->setValidator(new QIntValidator(0,10,this));
+
+		spell3[i] = new But(this);
+		//spell3[i]->setStyleSheet("background: white;");
+		spell3[i]->setFont(font);
+		spell3[i]->setText("0");
+		spell3[i]->addr = i;//cnt
+		spell3[i]->frm = this->frameCnt;
+
+		spell1[i]->setGeometry(250,varTemp,40,30);
+		spell2[i]->setGeometry(290,varTemp,200,30);
+		spell3[i]->setGeometry(490,varTemp,40,30);
+		spell3[i]->show();
+
+		connect(spell3[i],SIGNAL(clicked()),spell3[i],SLOT(set() ) );
+
+		varTemp+=40;
+	}
 
 }
 

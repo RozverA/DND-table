@@ -7,12 +7,15 @@
 #include <QTextEdit>
 #include <QPushButton>
 #include <QLineEdit>
+#include "but.h"
 
 class frame : public QFrame
 {
 	Q_OBJECT
 public:
 	explicit frame(QWidget *parent = nullptr);
+	uint8_t frameCnt;
+
 	QLineEdit* Name;
 	//params
 	QPushButton*	STATb[7];
@@ -34,6 +37,16 @@ public:
 	//wearpon
 	QLabel*			wlb[4];
 	QLineEdit*		wl[4];
+
+	//kb
+	QLabel*			kblb;
+	QLineEdit*		kbl;
+
+	//spels
+	QLineEdit* spell1[10];
+	QLineEdit* spell2[10];
+	But* spell3[10];
+
 private slots:
 	void fotoClickIvt();
 	void hpMaxF();

@@ -4,6 +4,9 @@
 #include <QMainWindow>
 #include "frame.h"
 #include <QSettings>
+#include <QApplication>
+
+extern frame* ptrFrame[4];
 
 class MainWindow : public QMainWindow
 {
