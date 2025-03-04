@@ -19,9 +19,11 @@ public:
 	//QFrame* fra;
 	QPushButton* saveBut;
 	QPushButton* loadBut;
+	QPushButton* nextBut;
 	~MainWindow();
 private slots:
 	void saveProc();
 	void loadProc();
+	void nextProc();
 };
 #endif // MAINWINDOW_H

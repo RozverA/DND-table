@@ -12,20 +12,26 @@ MainWindow::MainWindow(QWidget *parent)	: QMainWindow(parent)
 	this->setWindowTitle("Персонажник");
 
 	saveBut = new QPushButton(this);
-	saveBut->setGeometry(1700,0,100,500);
+	saveBut->setGeometry(1700,600,100,100);
 	saveBut->setText("S\nA\nV\nE");
 	connect(saveBut,SIGNAL(clicked()),this,SLOT(saveProc() ) );
 
 	loadBut = new QPushButton(this);
-	loadBut->setGeometry(1700,500,100,500);
+	loadBut->setGeometry(1700,800,100,100);
 	loadBut->setText("L\nO\nA\nD");
 	connect(loadBut,SIGNAL(clicked()),this,SLOT(loadProc() ) );
+
+	nextBut = new QPushButton(this);
+	nextBut->setGeometry(1700,0,100,500);
+	nextBut->setText("N\ne\nx\nt");
+	nextBut->setStyleSheet("background: red; color: white;");
+	connect(nextBut,SIGNAL(clicked()),this,SLOT(nextProc() ) );
 
 	for(uint8_t i = 0; i < 4; i++)
 	{
 		frm[i] = new frame(this);
 		frm[i]->setGeometry(0,0,900,500);
-		frm[i]->fraN = i+1;
+		frm[i]->fraN = i;
 		frm[i]->fraS = QString::number(i+1);
 		frm[i]->frameCnt = i;
 		ptrFrame[i] = frm[i];
@@ -107,6 +113,22 @@ void MainWindow::loadProc()
 
 			frm[i]->kbl->setText(sett.value("KB").toString()				);
 		sett.endGroup();
+	}
+}
+
+void MainWindow::nextProc()
+{
+	uint val = 0;
+	for (uint8_t i = 0; i < 4; i++)
+	{
+		for(uint8_t spell = 0; spell < 10; spell++)
+		{
+			val = frm[i]->spell3[spell]->text().toInt();
+			if(!val){continue;}
+			val--;
+			frm[i]->spell3[spell]->setText(QString::number(val));
+		}
+
 	}
 }
 

@@ -2,6 +2,8 @@
 #include "A-def.h"
 #include <QValidator>
 
+uint8_t FRAN = 0;
+
 frame::frame(QWidget *parent) : QFrame(parent)
 {
 	this->setStyleSheet("background: rgb(100,100,100);");
@@ -135,6 +137,8 @@ frame::frame(QWidget *parent) : QFrame(parent)
 		spell1[i]->setStyleSheet("background: white;");
 		spell1[i]->setFont(font);
 		spell1[i]->setValidator(new QIntValidator(0,10,this));
+		spell1[i]->setText("0");
+
 
 		spell2[i] = new QLineEdit(this);
 		spell2[i]->setStyleSheet("background: white;");
@@ -146,7 +150,7 @@ frame::frame(QWidget *parent) : QFrame(parent)
 		spell3[i]->setFont(font);
 		spell3[i]->setText("0");
 		spell3[i]->addr = i;//cnt
-		spell3[i]->frm = this->frameCnt;
+		spell3[i]->frm = FRAN;
 
 		spell1[i]->setGeometry(250,varTemp,40,30);
 		spell2[i]->setGeometry(290,varTemp,200,30);
@@ -157,7 +161,7 @@ frame::frame(QWidget *parent) : QFrame(parent)
 
 		varTemp+=40;
 	}
-
+	FRAN++;
 }
 
 void frame::fotoClickIvt()
